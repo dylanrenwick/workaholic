@@ -1,0 +1,46 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended"
+    ],
+    "jsRules": {},
+    "rules": {
+        "curly": [true, "ignore-same-line"],
+        "array-type": [true, "generic"],
+        "member-ordering": [
+            true,
+            {
+                "order": [
+                    "public-static-field",
+                    "private-static-field",
+                    "private-instance-field",
+                    "protected-instance-field",
+                    "public-instance-field",
+                    "public-constructor",
+                    "protected-constructor",
+                    "private-constructor",
+                    "public-instance-method",
+                    "protected-instance-method",
+                    "private-instance-method",
+                    "public-static-method",
+                    "private-static-method"
+                ]
+            }
+        ],
+        "object-literal-shorthand": [true, "never"],
+        "trailing-comma": false,
+        "no-shadowed-variable": [
+            true,
+            {
+                "temporalDeadZone": false
+            }
+        ]
+    },
+    "rulesDirectory": [],
+    "linterOptions": {
+        "exclude": [
+            "gulpfile",
+            "bin/"
+        ]
+    }
+}
