@@ -10,19 +10,23 @@ export default class Job {
     private status: number = Job.STATUS_UNINITIALIZED;
     private counterLabel: string = "";
 
-    private predicate: (_: Job) => IYieldResult;
+    private predicate: (_: Job) => IterableIterator<IYieldResult>;
+    private iterator: IterableIterator<IYieldResult>;
 
     public internalState: any = {};
 
     public get Status(): number { return this.status; }
     public get CounterLabel(): string { return this.counterLabel; }
 
-    public constructor(predicate: (_: Job) => IYieldResult) {
+    public constructor(predicate: (_: Job) => IterableIterator<IYieldResult>) {
         this.predicate = predicate;
+        this.iterator = this.predicate(this);
     }
 
     public run(): IYieldResult {
-        return this.predicate(this);
+        const next = this.iterator.next();
+        if (next.value === undefined) return this.yield(Job.STATUS_COMPLETED, this.counterLabel);
+        return next.value;
     }
 
     public yield(status: number, counterLabel: string = ""): IYieldResult {
@@ -36,6 +40,7 @@ export default class Job {
             counterLabel: (status === Job.STATUS_HELD
                 || status === Job.STATUS_CANCELLED
                 || status === Job.STATUS_COMPLETED) ? counterLabel : "",
+            done: (status === Job.STATUS_CANCELLED || status === Job.STATUS_COMPLETED),
             job: this,
             status: status,
             type: "yield"

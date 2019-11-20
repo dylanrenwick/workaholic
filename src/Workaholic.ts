@@ -8,6 +8,12 @@ export default class Workaholic {
     public static get PRIORITY_MED(): number { return 1; }
     public static get PRIORITY_HIGH(): number { return 2; }
 
+    private static instance: Workaholic;
+    public static get Instance(): Workaholic {
+        if (Workaholic.instance === undefined) Workaholic.instance = new Workaholic();
+        return Workaholic.instance;
+    }
+
     private lowPriorityList: Queue<Job> = new Queue<Job>();
     private medPriorityList: Queue<Job> = new Queue<Job>();
     private highPriorityList: Queue<Job> = new Queue<Job>();

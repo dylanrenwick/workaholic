@@ -5,4 +5,5 @@ export default interface IYieldResult {
     job: Job;
     status: number;
     counterLabel: string;
+    done: boolean;
 }
