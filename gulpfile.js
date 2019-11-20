@@ -12,8 +12,8 @@ function build() {
             .pipe(tsProject());
 
     return merge([
-        tsResult.dts.pipe(gulp.dest('./bin/declarations/')),
-        tsResult.js.pipe(sm.write('.')).pipe(gulp.dest('./bin/js/'))
+        tsResult.dts.pipe(gulp.dest('./bin/')),
+        tsResult.js.pipe(sm.write('.')).pipe(gulp.dest('./bin/'))
     ]);
 };
 
