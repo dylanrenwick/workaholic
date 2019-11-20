@@ -2,21 +2,23 @@ const gulp = require('gulp');
 const ts = require('gulp-typescript');
 const sm = require('gulp-sourcemaps');
 const rimraf = require('rimraf');
+const merge = require('merge2');
 
 function build() {
-    var tsProject = ts.createProject('tsconfig.json');
+    var tsProject = ts.createProject('./tsconfig.json');
 
     var tsResult = tsProject.src()
         .pipe(sm.init())
-            .pipe(tsProject()).js
-            .pipe(sm.write('.'))
-            .pipe(gulp.dest('bin/'));
+            .pipe(tsProject());
 
-    return tsResult;
+    return merge([
+        tsResult.dts.pipe(gulp.dest('./bin/declarations/')),
+        tsResult.js.pipe(sm.write('.')).pipe(gulp.dest('./bin/js/'))
+    ]);
 };
 
 function clean(done) {
-    rimraf.sync('./bin');
+    rimraf.sync('./bin/');
     done();
 }
 
