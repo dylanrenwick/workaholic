@@ -25,7 +25,7 @@ export default class Job {
         return this.predicate(this);
     }
 
-    public yield(status: number, counterLabel: string): IYieldResult {
+    public yield(status: number, counterLabel: string = ""): IYieldResult {
         this.status = status;
         if (status === Job.STATUS_HELD
             || status === Job.STATUS_CANCELLED
