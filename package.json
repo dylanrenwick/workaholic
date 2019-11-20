@@ -11,6 +11,7 @@
   "devDependencies": {
     "@types/chai": "^4.2.5",
     "@types/mocha": "^5.2.7",
+    "@types/sinon": "^7.5.0",
     "chai": "^4.2.0",
     "gulp": "^4.0.2",
     "gulp-sourcemaps": "^2.6.5",
@@ -18,7 +19,9 @@
     "merge2": "^1.3.0",
     "mocha": "^6.2.2",
     "rimraf": "^3.0.0",
+    "sinon": "^7.5.0",
     "ts-node": "^8.5.2",
+    "ts-sinon": "^1.0.24",
     "tslint": "^5.20.1",
     "typescript": "^3.7.2"
   }
