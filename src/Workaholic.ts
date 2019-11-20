@@ -61,7 +61,7 @@ export default class Workaholic {
     private isValidJob(job: Job | null): boolean {
         if (job === null) return false;
         switch (job.Status) {
-            case Job.STATUS_COMPLETE: // Complete
+            case Job.STATUS_COMPLETED: // Complete
             case Job.STATUS_CANCELLED: // Cancelled
                 return false;
             case Job.STATUS_UNINITIALIZED: // Not yet started
@@ -80,7 +80,7 @@ export default class Workaholic {
     private processJobResult(result: IYieldResult, jobList: Queue<Job>): void {
         switch (result.status) {
             case Job.STATUS_UNINITIALIZED:
-            case Job.STATUS_COMPLETE:
+            case Job.STATUS_COMPLETED:
             case Job.STATUS_CANCELLED:
                 if (result.counterLabel) {
                     const counter = this.getOrCreateAtomicCounter(result.counterLabel);
