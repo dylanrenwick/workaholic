@@ -14,4 +14,8 @@ export default class Queue<T> {
     public peek(): T | null {
         return this.internalContainer[0] || null;
     }
+
+    public clear(): void {
+        this.internalContainer = [];
+    }
 }

@@ -37,6 +37,10 @@ describe("Queue class", () => {
             expect(queue.dequeue()).to.equal("first");
             expect(queue.dequeue()).to.equal("second");
         });
+
+        it("should return null when the queue is empty", () => {
+            expect(new Queue<string>().dequeue()).to.be.null;
+        });
     });
 
     describe(".Count", () => {
@@ -58,6 +62,21 @@ describe("Queue class", () => {
             const beforeCount = queue.Count;
             expect(queue.peek()).to.equal("first");
             expect(queue.Count).to.equal(beforeCount);
+        });
+
+        it("should return null when the queue is empty", () => {
+            expect(new Queue<string>().peek()).to.be.null;
+        });
+    });
+
+    describe(".clear()", () => {
+        it("should remove all items from the queue", () => {
+            const queue = new Queue<string>();
+            queue.enqueue("first");
+            queue.enqueue("second");
+            expect(queue.Count).to.equal(2);
+            queue.clear();
+            expect(queue.Count).to.equal(0);
         });
     });
 });
