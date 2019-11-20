@@ -4,7 +4,7 @@ import Job from "../src/Job";
 describe("Job class", () => {
     describe(".run()", () => {
         it("should run the job's predicate function", (done) => {
-            const job: Job = new Job((j) => {
+            const job: Job = new Job(function*(j) {
                 done();
                 return j.yield(Job.STATUS_COMPLETED);
             });
@@ -14,7 +14,7 @@ describe("Job class", () => {
 
     describe(".yield(status: number, counterLabel: string)", () => {
         it("should store the yielded state", () => {
-            const job: Job = new Job((j) => {
+            const job: Job = new Job(function*(j) {
                 return j.yield(Job.STATUS_COMPLETED);
             });
             job.run();
@@ -22,7 +22,7 @@ describe("Job class", () => {
         });
 
         it("should return a valid IYieldResult", () => {
-            const job: Job = new Job((j) => {
+            const job: Job = new Job(function*(j) {
                 return j.yield(Job.STATUS_COMPLETED, "label");
             });
             const result = job.run();
